@@ -15,8 +15,8 @@ app.use(express.static(__dirname + '/../public'));
 app.get('/investors', getAllInvestors);
 app.post('/investors', addInvestment);
 
-app.get('./funds', getAllFunds);
-app.post('./funds', addFunds);
+app.get('/funds', getAllFunds);
+app.post('/funds', addFunds);
 
 app.listen(PORT, () => {
   console.log(`Its OVER \n http://localhost:9000 !!!`);
