@@ -1,0 +1,44 @@
+{
+  "name": "crypto-mutual-fund",
+  "version": "1.0.0",
+  "description": "Crypto Mutual Fund Data representation.",
+  "main": "server/server.js",
+  "scripts": {
+    "react-dev": "webpack -d --watch",
+    "start": "nodemon server/server.js",
+    "create-database": "node createDbs.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aimenAlt/crypto-mutual-fund.git"
+  },
+  "keywords": [
+    "crypto"
+  ],
+  "author": "Aimen Altaiyeb",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aimenAlt/crypto-mutual-fund/issues"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "fetch": "^1.1.0",
+    "jquery": "^3.3.1",
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",
+    "validator": "^10.11.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "mongoose": "^5.1.2",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2"
+  },
+  "homepage": "https://github.com/aimenAlt/crypto-mutual-fund#readme"
+}
