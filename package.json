@@ -2,10 +2,11 @@
   "name": "crypto-mutual-fund",
   "version": "1.0.0",
   "description": "Crypto Mutual Fund Data representation.",
-  "main": "index.js",
+  "main": "server/server.js",
   "scripts": {
     "react-dev": "webpack -d --watch",
-    "start": "nodemon server/index.js",
+    "start": "nodemon server/server.js",
+    "create-database": "node createDbs.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,6 +23,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "fetch": "^1.1.0",
     "jquery": "^3.3.1",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
