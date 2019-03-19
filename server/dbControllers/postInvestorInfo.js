@@ -1,4 +1,4 @@
-const { newFunds,   newInvestor, newInvestment, updateFunds } = require('./../../sqlDatabase/index.js')
+const { newFunds,   newInvestor, newInvestment, updateFunds } = require('./../../database/index.js')
 
 function addNewFunds (req, res) {
   newFunds(req.body, (err, data) => {

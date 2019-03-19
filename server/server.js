@@ -1,12 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-// const { getAllInvestors, addInvestment } = require('./controllers/investorsController.js');
-// const { getAllFunds, addFunds } = require('./controllers/fundsController.js');
-// const { getCryptos } = require('./controllers/allCryptos.js');
 const { getAllCryptos } = require('./../coincapApi/index.js');
-const { getInvestorsData, getFunds} = require('./sqlControllers/getInvestorsInfo.js');
-const { addNewFunds, addNewInvestor, addNewInvestment } = require('./sqlControllers/postInvestorInfo.js');
-const database = require('./../database/index.js');
+const { getInvestorsData, getFunds} = require('./dbControllers/getInvestorsInfo.js');
+const { addNewFunds, addNewInvestor, addNewInvestment } = require('./dbControllers/postInvestorInfo.js');
 
 const app = express();
 const PORT = 9000;

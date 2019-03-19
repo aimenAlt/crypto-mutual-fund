@@ -1,5 +1,5 @@
 const _ = require('lodash');
-const { funds, investorsInfo } = require('./../../sqlDatabase/index.js')
+const { funds, investorsInfo } = require('./../../database/index.js')
 
 function getFunds (req, res) {
   funds((err, data) => {
