@@ -2,9 +2,6 @@ import React from 'react';
 import FundsRow from './FundsRow.jsx';
 
 const FundsTable = ({ ourCryptos, funds, totalInUsd, grabCurrencyInfo, cryptoList }) => {
-  // const findInfo = (symbol, cryptoList) => {
-    
-  // };
   return (
     <div className="investors-table">
       <table className="rwd-table">
@@ -17,7 +14,6 @@ const FundsTable = ({ ourCryptos, funds, totalInUsd, grabCurrencyInfo, cryptoLis
             <th>Percent of funds</th>
           </tr>
           {
-            // if (funds.length > 0 && ourCryptos.length > 0) {
               funds.map( (element) => {
                 console.log(funds);
                 if(element.crypto_symbol === "USD") {

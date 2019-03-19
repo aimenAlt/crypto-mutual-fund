@@ -24,6 +24,7 @@ app.post('/investments', addNewInvestment)
 
 app.get('/cryptos', getAllCryptos);
 
+
 app.listen(PORT, () => {
   console.log(`Its OVER \n http://localhost:9000 !!!`);
 });
