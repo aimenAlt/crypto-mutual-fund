@@ -1,5 +1,5 @@
 import React from 'react';
-import Investor from './Investor.jsx'
+import InvestorOptions from './InvestorOptions.jsx'
 import _ from 'lodash';
 
 class InvestmentForm extends React.Component {
@@ -48,7 +48,7 @@ class InvestmentForm extends React.Component {
           <label> Name: <br/> </label>
           <select onChange={this.textChange} id='idSelected'>
             { Object.keys(investors).map((element) => {
-                return <Investor investor={investors[element]} />
+                return <InvestorOptions investor={investors[element]} />
               })
             }
           </select>

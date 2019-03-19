@@ -15,6 +15,8 @@ function funds(callback) {
 }
 
 function newFunds(body, callback) {
+  console.log("being called?");
+  console.log(body);
   connection.query(`INSERT INTO funds (crypto_symbol, crypto_name, amount_owned) VALUES ("${body.crypto_symbol}", "${body.crypto_name}", ${body.amount_owned});`,
   (err, response, test) => {
     if (err) {

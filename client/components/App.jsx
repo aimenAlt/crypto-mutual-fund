@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Forms from './Forms.jsx';
+import InvestorsTable from './InvestorsTable.jsx'
 import coincapApi from './../../coincapApi/index.js';
 // import Graph from './Graph.jsx';
 
@@ -8,7 +9,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      investors: [],
+      investors: {},
       funds: [],
       cryptoList: [],
       ourCryptos: [],
@@ -113,6 +114,7 @@ class App extends React.Component {
       amount_owned: amountBuying,
       usdLeft: currentUsd - paying
     }
+    console.log(objSent);
     axios.post('/funds', objSent).then(() => {
       this.getInvestorsAndFunds();
     })
@@ -132,6 +134,8 @@ class App extends React.Component {
     return (
       <div>
         {/* <Graph investors={investors} /> */}
+
+        <InvestorsTable investors={investors} totalInUsd={totalInUsd} />
         <Forms
           newInvestor={this.newInvestor}
           newInvestment={this.newInvestment}

@@ -6,7 +6,15 @@ function addNewFunds (req, res) {
       res.sendStatus(400);
       throw ("error!");
     } else {
-      res.sendStatus(201);
+      updateFunds({id: 1, amount_owned: req.body.usdLeft}, (err, response) => {
+        if (err) {
+          console.log(err);
+          res.sendStatus(400);
+          throw ("error!");    
+        } else {
+          res.sendStatus(201);
+        }
+      });
     }
   })
 }
@@ -18,16 +26,7 @@ function addNewInvestor (req, res) {
       res.sendStatus(400);
       throw ("error!");
     } else {
-
-      updateFunds({id: 1, amount_owned: req.body.usdLeft}, (err, response) => {
-        if (err) {
-          console.log(err);
-          res.sendStatus(400);
-          throw ("error!");    
-        } else {
-          res.sendStatus(201);
-        }
-      });
+      res.sendStatus(201)
     }
   })
 }
