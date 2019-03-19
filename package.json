@@ -26,8 +26,12 @@
     "fetch": "^1.1.0",
     "jquery": "^3.3.1",
     "jsonp": "^0.2.1",
+    "lodash": "^4.17.11",
+    "mysql": "^2.16.0",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
+    "react-easy-chart": "^1.0.0",
+    "react-svg-piechart": "^2.3.0",
     "validator": "^10.11.0"
   },
   "devDependencies": {
