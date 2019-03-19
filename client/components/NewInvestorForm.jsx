@@ -32,7 +32,7 @@ class NewInvestorForm extends React.Component {
         <form>
           <label> Name: <br/> </label>
             <input id="name" onChange={this.textChange} value={name}></input>
-          <label> Name: <br/> </label>
+          <label> <br/> email: <br/> </label>
             <input id="email" onChange={this.textChange} value={email}></input>
         </form>
         <button onClick={this.registerationClick}> Submit </button>

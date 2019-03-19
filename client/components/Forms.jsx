@@ -9,11 +9,18 @@ class Forms extends React.Component {
     this.state = {
       view: "investment"
     }
+    this.changeView = this.changeView.bind(this);
+  }
+
+  changeView(view) {
+    this.setState({
+      view: view
+    });
   }
 
   render() {
     const { view } = this.state;
-    const { newInvestor } = this.props;
+    const { newInvestor, newInvestment, investors, cryptoList, funds } = this.props;
     return (
       <div className="forms-container">
         <nav>
@@ -33,13 +40,34 @@ class Forms extends React.Component {
           >
             Investor Registration
           </span>
+          <span 
+            className={this.state.view === 'exchange' 
+              ? 'nav-item selected'
+              : 'nav-item unselected'}
+            onClick={() => this.changeView('exchange')}
+          >
+            Investor Registration
+          </span>
         </nav>
         <div>
           {view === "investment"
-          ? <InvestmentForm />
+          ? <InvestmentForm newInvestment={newInvestment} investors={investors} />
           : <NewInvestorForm newInvestor={newInvestor} />
           }
         </div>
+        <div>
+          {view === "newInvestor"
+          ? <NewInvestorForm newInvestor={newInvestor} />
+          : null
+          }
+        </div>
+        <div>
+          {view === "exchange"
+          ? <InvestmentForm newInvestment={newInvestment} investors={investors} />
+          : null
+          }
+        </div>
+
       </div>
     );
   }

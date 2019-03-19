@@ -26,7 +26,7 @@ function newFunds(body, callback) {
 }
 
 function updateFunds(body, callback) {
-  connection.query(``, (err, response, test) => {
+  connection.query(`UPDATE funds SET amount_owned = ${body.amount_owned} WHERE crypto_symbol = ${body.crypto_symbol};`, (err, response, test) => {
     if (err) {
       callback(err);
     } else {
