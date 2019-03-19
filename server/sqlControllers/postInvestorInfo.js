@@ -14,10 +14,20 @@ function addNewFunds (req, res) {
 function addNewInvestor (req, res) {
   newInvestor(req.body, (err, data) => {
     if (err) {
+      console.log(err);
       res.sendStatus(400);
       throw ("error!");
     } else {
-      res.sendStatus(201);
+
+      updateFunds({id: 1, amount_owned: req.body.usdLeft}, (err, response) => {
+        if (err) {
+          console.log(err);
+          res.sendStatus(400);
+          throw ("error!");    
+        } else {
+          res.sendStatus(201);
+        }
+      });
     }
   })
 }
@@ -28,9 +38,10 @@ function addNewInvestment (req, res) {
       res.sendStatus(400);
       throw ("error!");
     } else {
-      let sum = req.total_before + req.body.investment_amount;
-      updateFunds({crypto_symbol: "USD", amount_owned: sum}, (err, response) => {
+      let sum = req.body.currentUsd + req.body.investment_amount;
+      updateFunds({id: 1, amount_owned: sum}, (err, response) => {
         if (err) {
+          console.log(err);
           res.sendStatus(400);
           throw ("error!");    
         } else {

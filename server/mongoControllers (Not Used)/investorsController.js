@@ -1,9 +1,7 @@
 const InvestorsModel = require('./../../database/models/Investors.js');
 
 const getAllInvestors = (req, res) => {
-  console.log("hi");
   InvestorsModel.find((err, data, response) => {
-    console.log("what?");
     if (err) {
       console.log('err');
       res.sendStatus(400);

@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Forms from './Forms.jsx';
 import coincapApi from './../../coincapApi/index.js';
+// import Graph from './Graph.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -20,12 +21,29 @@ class App extends React.Component {
     this.newInvestment = this.newInvestment.bind(this);
     this.getTotalInUsd = this.getTotalInUsd.bind(this);
     this.grabCurrencyInfo = this.grabCurrencyInfo.bind(this);
+    this.investUsingUsd = this.investUsingUsd.bind(this);
     // this.getAllCryptos = coincapApi.getAllCryptos.bind(this);
   }
 
   componentDidMount() {
-    this.getCryptoList();
-    this.getInvestorsAndFunds();
+    const allGets = () => {Promise.all([
+      axios.get('/investors'),
+      axios.get('/funds'),
+      axios.get('/cryptos')
+    ]).then( data => [data[0].data, data[1].data, data[2].data])
+    .then(([ investorsGot , fundsGot, cryptoList ]) => {
+      this.setState({
+        investors: investorsGot,
+        funds: fundsGot,
+        cryptoList: cryptoList
+      })
+      this.getTotalInUsd();
+    })
+    .catch((err) => {
+      console.log(err);
+      console.log('something bad happened!!!!!!');
+    })}
+    allGets();
   }
 
   getInvestorsAndFunds() {
@@ -38,8 +56,10 @@ class App extends React.Component {
         investors: investorsGot,
         funds: fundsGot
       })
+      this.getTotalInUsd();
     })
     .catch((err) => {
+      console.log(err);
       console.log('something bad happened');
     })
   }
@@ -49,37 +69,52 @@ class App extends React.Component {
       this.setState({
         cryptoList: data.data
       });
-      console.log(this.state);
+      this.getTotalInUsd();
     })
   }
 
   newInvestor(data) {
     axios.post('/investors', data).then( data => {
-      getInvestorsAndFunds();
+      this.getInvestorsAndFunds();
     })
   }
 
   newInvestment(data) {
     axios.post('/investments', data).then( data => {
-      getInvestorsAndFunds();
+      this.getInvestorsAndFunds();
     })
   }
 
   getTotalInUsd() {
     const { funds, cryptoList } = this.state
     let total = 0;
-    usdAmount = 0;
+    let usdAmount = 0;
     for (var i = 0; i < funds.length; i++) {
       if (funds[i].crypto_symbol === "USD") {
         usdAmount = funds[i].amount_owned;
         total += usdAmount;
+        continue;
       }
-      let tempInfo = grabCurrencyInfo(funds[i].crypto_symbol, cryptoList);
+      let tempInfo = this.grabCurrencyInfo(funds[i].crypto_symbol, cryptoList);
       total += (tempInfo.priceUsd * funds[i].amount_owned);
     }
     this.setState({
       usdAmount: usdAmount,
       totalInUsd: total
+    })
+  }
+
+  investUsingUsd(symbol, currentUsd, paying) {
+    let currencyInfo = this.grabCurrencyInfo(symbol, this.state.cryptoList);
+    let amountBuying = paying / currencyInfo.priceUsd;
+    let objSent = {
+      crypto_symbol: currencyInfo.symbol,
+      crypto_name: currencyInfo.name,
+      amount_owned: amountBuying,
+      usdLeft: currentUsd - paying
+    }
+    axios.post('/funds', objSent).then(() => {
+      this.getInvestorsAndFunds();
     })
   }
   
@@ -96,6 +131,7 @@ class App extends React.Component {
     const { investors, funds, cryptoList, usdAmount, totalInUsd } = this.state;
     return (
       <div>
+        {/* <Graph investors={investors} /> */}
         <Forms
           newInvestor={this.newInvestor}
           newInvestment={this.newInvestment}
@@ -104,6 +140,7 @@ class App extends React.Component {
           cryptoList={cryptoList}
           usdAmount={usdAmount}
           totalInUsd={totalInUsd}
+          investUsingUsd={this.investUsingUsd}
         />
       </div>
     );

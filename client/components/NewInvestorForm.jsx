@@ -4,7 +4,7 @@ class NewInvestorForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
+      investor_name: "",
       email: ""
     }
 
@@ -25,14 +25,14 @@ class NewInvestorForm extends React.Component {
 
 
   render() {
-    const { name, email } = this.state;
+    const { investor_name, email } = this.state;
     const { newInvestor } = this.props;
     return (
       <div className="form">
         <form>
           <label> Name: <br/> </label>
-            <input id="name" onChange={this.textChange} value={name}></input>
-          <label> <br/> email: <br/> </label>
+            <input id="investor_name" onChange={this.textChange} value={investor_name}></input>
+          <label> <br/> eMail: <br/> </label>
             <input id="email" onChange={this.textChange} value={email}></input>
         </form>
         <button onClick={this.registerationClick}> Submit </button>

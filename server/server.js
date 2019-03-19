@@ -24,7 +24,7 @@ app.get('/funds', getFunds);
 app.post('/funds', addNewFunds);
 // app.put('/funds/:symb', )
 
-app.put('/investments', addNewInvestment)
+app.post('/investments', addNewInvestment)
 
 app.get('/cryptos', getAllCryptos);
 

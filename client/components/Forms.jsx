@@ -1,7 +1,7 @@
 import React from 'react';
 import InvestmentForm from './InvestmentForm.jsx';
 import NewInvestorForm from './NewInvestorForm.jsx';
-
+import ExchangeForm from './ExchangeForm.jsx';
 
 class Forms extends React.Component {
   constructor(props) {
@@ -20,7 +20,7 @@ class Forms extends React.Component {
 
   render() {
     const { view } = this.state;
-    const { newInvestor, newInvestment, investors, cryptoList, funds } = this.props;
+    const { newInvestor, newInvestment, investors, cryptoList, funds, usdAmount, totalInUsd, investUsingUsd } = this.props;
     return (
       <div className="forms-container">
         <nav>
@@ -46,13 +46,13 @@ class Forms extends React.Component {
               : 'nav-item unselected'}
             onClick={() => this.changeView('exchange')}
           >
-            Investor Registration
+            Crypto Exchange 
           </span>
         </nav>
         <div>
           {view === "investment"
-          ? <InvestmentForm newInvestment={newInvestment} investors={investors} />
-          : <NewInvestorForm newInvestor={newInvestor} />
+          ? <InvestmentForm newInvestment={newInvestment} investors={investors} usdAmount={usdAmount} totalInUsd={totalInUsd} />
+          : null
           }
         </div>
         <div>
@@ -63,7 +63,7 @@ class Forms extends React.Component {
         </div>
         <div>
           {view === "exchange"
-          ? <InvestmentForm newInvestment={newInvestment} investors={investors} />
+          ? <ExchangeForm cryptoList={cryptoList} usdAmount={usdAmount} investUsingUsd={investUsingUsd}  />
           : null
           }
         </div>

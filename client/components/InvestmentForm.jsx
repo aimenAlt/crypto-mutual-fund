@@ -6,6 +6,7 @@ class InvestmentForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      idSelected: 1,
       investment_amount: 0
     }
     this.textChange = this.textChange.bind(this);
@@ -13,20 +14,27 @@ class InvestmentForm extends React.Component {
   }
 
   textChange(event) {
+    let value = event.target.value;
+    if (event.target.id === 'idSelected') {
+      value = value.split(" ");
+      value = parseInt(value[0]);
+    }
     this.setState({
-      [event.target.id]: event.target.value
+      [event.target.id]: value
     });
   }
 
   registerationClick(event) {
-  //   let obj = {
-  //     investor_id: ,
-  //     investment_amount: ,
-  //     time_invested: new Date(),
-  //     total_before: ,
-        // currentUsd: 
-  //   }
-  //   this.props.newInvestment();
+    const { usdAmount, totalInUsd, newInvestment } = this.props;
+    const { investment_amount, idSelected } = this.state;
+    let obj = {
+      investor_id: idSelected,
+      investment_amount: parseInt(investment_amount),
+      time_invested: Date.now(),
+      total_before: totalInUsd,
+      currentUsd:  usdAmount
+    }
+    newInvestment(obj);
   }
 
 
@@ -38,14 +46,14 @@ class InvestmentForm extends React.Component {
       <div className="form">
         <form>
           <label> Name: <br/> </label>
-          <select onChange={this.textChange} id='select'>
+          <select onChange={this.textChange} id='idSelected'>
             { Object.keys(investors).map((element) => {
                 return <Investor investor={investors[element]} />
               })
             }
           </select>
             {/* <input id="name" onChange={this.textChange} value={name}></input> */}
-          <label> <br/> Investment Amount: <br/> </label>
+          <label> <br/> Investment Amount (in Dollars): <br/> </label>
             <input id="investment_amount" onChange={this.textChange} value={investment_amount}></input>
         </form>
         <button onClick={this.registerationClick}> Submit </button>
