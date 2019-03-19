@@ -42,8 +42,9 @@ class App extends React.Component {
   getCryptoList() {
     axios.get('/cryptos').then(data => {
       this.setState({
-        cryptoList: data
+        cryptoList: data.data
       });
+      console.log(this.state);
     })
   }
 
