@@ -13,14 +13,14 @@ class App extends React.Component {
         ourCryptos: [],
     }
     this.getInvestorsAndFunds = this.getInvestorsAndFunds.bind(this);
-    // this.getCryptoList = this.cryptoList.bind(this);
-    this.getAllCryptos = coincapApi.getAllCryptos.bind(this);
+    this.getCryptoList = this.getCryptoList.bind(this);
+    // this.getAllCryptos = coincapApi.getAllCryptos.bind(this);
   }
 
   componentDidMount() {
     this.getInvestorsAndFunds();
-    this.getAllCryptos();
-    console.log(this.state);
+    this.getCryptoList();
+    // this.getAllCryptos();
   }
 
   getInvestorsAndFunds() {
@@ -33,16 +33,19 @@ class App extends React.Component {
         investors: investorsGot,
         funds: fundsGot
       })
-      console.log(this.state);
-
     })
     .catch((err) => {
       console.log('something bad happened');
     })
   }
 
-  // getCryptoList() {
-  // }
+  getCryptoList() {
+    axios.get('/cryptos').then(data => {
+      this.setState({
+        cryptoList: data
+      });
+    })
+  }
 
   
 
