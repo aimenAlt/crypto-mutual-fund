@@ -1,9 +1,11 @@
 const axios = require('axios');
 
 const getAllCryptos = () => {
+  console.log("hi");
   axios.get('http://api.coincap.io/v2/assets?limit=300').then( data => {
+    console.log("Whaaah!");
     this.setState({
-      allCryptos: data.data
+      cryptoList: data.data
     });
   }).catch((err) => {
     console.log(Object.keys(err));

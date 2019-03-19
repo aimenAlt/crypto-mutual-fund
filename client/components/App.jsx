@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 
+import coincapApi from './../../coincapApi/index.js';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -10,23 +12,39 @@ class App extends React.Component {
         cryptoList: [],
         ourCryptos: [],
     }
-    this.getAll = this.getAll.bind();
+    this.getInvestorsAndFunds = this.getInvestorsAndFunds.bind(this);
+    // this.getCryptoList = this.cryptoList.bind(this);
+    this.getAllCryptos = coincapApi.getAllCryptos.bind(this);
   }
 
   componentDidMount() {
-    this.getAll();
+    this.getInvestorsAndFunds();
+    this.getAllCryptos();
+    console.log(this.state);
   }
 
-  getAll() {
+  getInvestorsAndFunds() {
     Promise.all([
       axios.get('/investors'),
       axios.get('/funds')
-    ]).then( data => {
-      console.log(data);
-    }).catch((err) => {
+    ]).then( data => [data[0].data, data[1].data])
+    .then(([ investorsGot , fundsGot ]) => {
+      this.setState({
+        investors: investorsGot,
+        funds: fundsGot
+      })
+      console.log(this.state);
+
+    })
+    .catch((err) => {
       console.log('something bad happened');
     })
   }
+
+  // getCryptoList() {
+  // }
+
+  
 
   render () {
     return(
