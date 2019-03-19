@@ -5,9 +5,9 @@ const FundsRow = ({ symbol, name, amount, amountInUsd, percent }) => {
       <tr>
         <td>{symbol}</td>
         <td>{name}</td>
-        <td>{amount}</td>
-        <td>{amountInUsd}</td>
-        <td>{percent}</td>
+        <td>{amount.toFixed(2)}</td>
+        <td>$ {amountInUsd.toFixed(2)}</td>
+        <td>{percent.toFixed(2) * 100} %</td>
       </tr>
   );
 };

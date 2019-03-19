@@ -6,7 +6,7 @@ const InvestorsTable = ({ investors, totalInUsd }) => {
   return (
     <div className="investors-table">
       <table className="rwd-table">
-        <tbody table className="rwd-table">
+        <tbody className="rwd-table">
           <tr>
             <th>Name</th>
             <th>eMail</th>

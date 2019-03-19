@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import Forms from './Forms.jsx';
-import InvestorsTable from './InvestorsTable.jsx'
+import InvestorsTable from './InvestorsTable.jsx';
+import FundsTable from './FundsTable.jsx';
 import coincapApi from './../../coincapApi/index.js';
 // import Graph from './Graph.jsx';
 
@@ -88,6 +89,7 @@ class App extends React.Component {
 
   getTotalInUsd() {
     const { funds, cryptoList } = this.state
+    let ourCryptos = [];
     let total = 0;
     let usdAmount = 0;
     for (var i = 0; i < funds.length; i++) {
@@ -97,11 +99,13 @@ class App extends React.Component {
         continue;
       }
       let tempInfo = this.grabCurrencyInfo(funds[i].crypto_symbol, cryptoList);
+      ourCryptos.push(tempInfo);
       total += (tempInfo.priceUsd * funds[i].amount_owned);
     }
     this.setState({
       usdAmount: usdAmount,
-      totalInUsd: total
+      totalInUsd: total,
+      ourCryptos: ourCryptos
     })
   }
 
@@ -122,6 +126,7 @@ class App extends React.Component {
   
   grabCurrencyInfo(symbol, array) {
     for (var i = 0; i < array.length; i++) {
+      console.log(array[i]);
       if (array[i].symbol === symbol) {
         return array[i];
       }
@@ -130,11 +135,11 @@ class App extends React.Component {
   }
   
   render () {
-    const { investors, funds, cryptoList, usdAmount, totalInUsd } = this.state;
+    const { investors, funds, cryptoList, usdAmount, totalInUsd, ourCryptos } = this.state;
     return (
       <div>
         {/* <Graph investors={investors} /> */}
-
+        <FundsTable ourCryptos={ourCryptos} funds={funds} totalInUsd={totalInUsd} grabCurrencyInfo={this.grabCurrencyInfo} cryptoList={cryptoList} />
         <InvestorsTable investors={investors} totalInUsd={totalInUsd} />
         <Forms
           newInvestor={this.newInvestor}

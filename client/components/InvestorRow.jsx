@@ -5,8 +5,8 @@ const InvestorRow = ({ name, email, amountInvested, currentAmount, percentOwns }
       <tr>
         <td>{name}</td>
         <td>{email}</td>
-        <td>{amountInvested.toFixed(2)}</td>
-        <td>{currentAmount.toFixed(2)}</td>
+        <td>$ {amountInvested.toFixed(2)}</td>
+        <td>$ {currentAmount.toFixed(2)}</td>
         <td>{percentOwns.toFixed(2)} % </td>
       </tr>
   );
