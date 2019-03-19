@@ -2,12 +2,15 @@ const FundsModel = require('./../../database/models/Funds.js');
 
 const getAllFunds = (req, res) => {
   FundsModel.find((err, data, response) => {
+    console.log('this working too?');
     if (err) {
       res.sendStatus(400);
       throw ("err");
     } else {
-      res.sendStatus(200);
-      res.end(data);
+      console.log('this working too?');
+      console.log(data);
+      res.status(200);
+      res.end(JSON.stringify(data));
     }
   });
 };
