@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-
+import Forms from './Forms.jsx';
 import coincapApi from './../../coincapApi/index.js';
 
 class App extends React.Component {
@@ -14,13 +14,13 @@ class App extends React.Component {
     }
     this.getInvestorsAndFunds = this.getInvestorsAndFunds.bind(this);
     this.getCryptoList = this.getCryptoList.bind(this);
+    this.newInvestor = this.newInvestor.bind(this);
     // this.getAllCryptos = coincapApi.getAllCryptos.bind(this);
   }
 
   componentDidMount() {
-    this.getInvestorsAndFunds();
     this.getCryptoList();
-    // this.getAllCryptos();
+    this.getInvestorsAndFunds();
   }
 
   getInvestorsAndFunds() {
@@ -48,12 +48,18 @@ class App extends React.Component {
     })
   }
 
+  newInvestor(data) {
+    axios.post('/investors', data).then( data => {
+      getInvestorsAndFunds();
+    })
+  }
+
   
 
   render () {
     return(
       <div>
-        Stuff
+        <Forms newInvestor={this.newInvestor}/>
       </div>
     );
   }

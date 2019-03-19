@@ -13,7 +13,6 @@ function getFunds (req, res) {
 }
 
 function getInvestorsData (req, res) {
-  // console.log(investorsInfo);
   investorsInfo((err, data) => {
     console.log(err);
     if (err) {
@@ -35,14 +34,11 @@ function calculatePercent(array) {
     let tempMutualFunds = array[i].total_before;
     let tempPercent = 100.0;
     let tempPercentWorth = (array[i].investment_amount/tempMutualFunds) * tempPercent;
-    console.log("what? ", array[i].investment_amount);
     tempMutualFunds += array[i].investment_amount;
     tempPercent += tempPercentWorth;
     let hundredDivider = tempPercent / 100.0;
-    console.log("HD: ", tempPercent);
     tempPercentWorth = tempPercentWorth / hundredDivider;
     investors = _.mapValues(investors, (element) => {
-      console.log(hundredDivider);
       element.percentOwned = element.percentOwned / hundredDivider;
       if (element.id === array[i].investor_id) {
         element.percentOwned += tempPercentWorth;
@@ -51,7 +47,6 @@ function calculatePercent(array) {
       return element;
     });
   }
-  console.log(investors);
   return investors;
 }
 
