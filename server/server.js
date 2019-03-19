@@ -4,6 +4,7 @@ const { getAllInvestors, addInvestment } = require('./controllers/investorsContr
 const { getAllFunds, addFunds } = require('./controllers/fundsController.js');
 const { getCryptos } = require('./controllers/allCryptos.js');
 const { getAllCryptos } = require('./../coincapApi/index.js');
+const { getInvestorsData, getFunds} = require('./sqlControllers/getInvestorsInfo.js');
 const database = require('./../database/index.js');
 
 const app = express();
@@ -14,11 +15,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static(__dirname + '/../public'));
 
-app.get('/investors', getAllInvestors);
-app.post('/investors', addInvestment);
+app.get('/investors', getInvestorsData);
+// app.post('/investors', addInvestment);
+// app.put('/investors/:email', )
 
-app.get('/funds', getAllFunds);
-app.post('/funds', addFunds);
+app.get('/funds', getFunds);
+// app.post('/funds', addFunds);
+// app.put('/funds/:symb', )
 
 app.get('/cryptos', getAllCryptos);
 

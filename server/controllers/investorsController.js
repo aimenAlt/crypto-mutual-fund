@@ -30,9 +30,27 @@ const addInvestment = (req, res) => {
   });
 };
 
+// const investmentSort = (array) => {
+//   let length = array.length;
+//   let indexOfSmallest = 0;
+//   let orderedArray = 
+//   for (var i = 0; i < length; i++) {
+//     let indexOfSmallest = 0;
+//     for (var j = 0; j < array.length; i++) {
+//       if (array[j].time_deposited < array[indexOfSmallest].time_deposited) {
+//         indexOfSmallest = j;
+//       }
+//     }
+    
+//   } 
+// }
 
 
 module.exports = {
   getAllInvestors,
   addInvestment
 }
+
+// amount: 1000,
+// time_deposited: new Date,
+// all_funds_before: 0
